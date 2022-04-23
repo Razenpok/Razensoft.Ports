@@ -1,0 +1,28 @@
+{
+    "name": "Razensoft.Ports.Extenject",
+    "references": [
+        "Razensoft.Ports",
+        "Razensoft.Ports.UniTaskPubSub",
+        "Zenject"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.svermeulen.extenject",
+            "expression": "",
+            "define": "RAZENSOFT_PORTS_EXTENJECT"
+        },
+        {
+            "name": "jp.hadashikick.unitaskpubsub",
+            "expression": "",
+            "define": "RAZENSOFT_PORTS_UNITASKPUBSUB"
+        }
+    ],
+    "noEngineReferences": false
+}

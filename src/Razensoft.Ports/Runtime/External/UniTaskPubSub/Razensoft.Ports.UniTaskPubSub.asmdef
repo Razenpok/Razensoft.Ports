@@ -1,0 +1,23 @@
+{
+    "name": "Razensoft.Ports.UniTaskPubSub",
+    "references": [
+        "Razensoft.Ports",
+        "UniTaskPubSub",
+        "UniTask"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "jp.hadashikick.unitaskpubsub",
+            "expression": "",
+            "define": "RAZENSOFT_PORTS_UNITASKPUBSUB"
+        }
+    ],
+    "noEngineReferences": false
+}

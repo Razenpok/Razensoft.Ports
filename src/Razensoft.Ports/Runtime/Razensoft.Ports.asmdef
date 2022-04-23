@@ -1,0 +1,23 @@
+{
+    "name": "Razensoft.Ports",
+    "references": [
+        "UniTask",
+        "UniTaskPubSub",
+        "VContainer"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.cysharp.unitask",
+            "expression": "",
+            "define": "RAZENSOFT_PORTS_UNITASK"
+        }
+    ],
+    "noEngineReferences": false
+}

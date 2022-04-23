@@ -1,0 +1,17 @@
+{
+    "name": "Razensoft.Ports.Editor",
+    "references": [
+        "GUID:a147503c0525495797e398c3761ee20d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

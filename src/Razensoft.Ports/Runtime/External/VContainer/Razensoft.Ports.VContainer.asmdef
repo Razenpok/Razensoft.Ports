@@ -1,0 +1,28 @@
+{
+    "name": "Razensoft.Ports.VContainer",
+    "references": [
+        "Razensoft.Ports",
+        "Razensoft.Ports.UniTaskPubSub",
+        "VContainer"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "jp.hadashikick.vcontainer",
+            "expression": "",
+            "define": "RAZENSOFT_PORTS_VCONTAINER"
+        },
+        {
+            "name": "jp.hadashikick.unitaskpubsub",
+            "expression": "",
+            "define": "RAZENSOFT_PORTS_UNITASKPUBSUB"
+        }
+    ],
+    "noEngineReferences": false
+}
