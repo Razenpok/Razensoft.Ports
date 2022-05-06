@@ -1,17 +1,21 @@
+using System;
 using System.Linq;
 using System.Threading;
 
 #if RAZENSOFT_PORTS_UNITASK
 using Cysharp.Threading.Tasks;
+
 #else
 using System.Threading.Tasks;
 #endif
 
 namespace Razensoft.Ports.Wrappers
 {
-    public abstract class RequestHandlerBase : HandlerBase { }
+    public abstract class RequestHandlerWrapper
+    {
+    }
 
-    public abstract class RequestHandlerWrapper<TResponse> : RequestHandlerBase
+    public abstract class RequestHandlerWrapper<TResponse> : RequestHandlerWrapper
     {
 #if RAZENSOFT_PORTS_UNITASK
         public abstract UniTask<TResponse> Handle(
@@ -44,12 +48,37 @@ namespace Razensoft.Ports.Wrappers
                     .Handle((TRequest) request, cancellationToken);
 
             return serviceFactory
-                .GetInstances<IPipelineBehavior<TRequest, TResponse>>()
-                .Reverse()
+                .GetInstances<IPipelineBehavior>()
                 .Aggregate(
                     (RequestHandlerDelegate<TResponse>) Handler,
                     (next, pipeline) => () => pipeline.Handle((TRequest) request, cancellationToken, next)
                 )();
+        }
+
+        private static THandler GetHandler<THandler>(ServiceFactory factory)
+        {
+            THandler handler;
+
+            try
+            {
+                handler = factory.GetInstance<THandler>();
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException(
+                    $"Error constructing handler for request of type {typeof(THandler)}. Register your handlers with the container. See the samples in GitHub for examples.",
+                    e
+                );
+            }
+
+            if (handler == null)
+            {
+                throw new InvalidOperationException(
+                    $"Handler was not found for request of type {typeof(THandler)}. Register your handlers with the container. See the samples in GitHub for examples."
+                );
+            }
+
+            return handler;
         }
     }
 }

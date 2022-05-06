@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
+using Razensoft.Ports.Pipeline;
 using Razensoft.Ports.Registration;
 using VContainer;
 
@@ -55,6 +56,8 @@ namespace Razensoft.Ports.VContainer
 
             builder.Register<ServiceFactory>(r => r.Resolve, Lifetime.Singleton);
             builder.Register<IInputPort, InputPort>(Lifetime.Singleton);
+            builder.Register<IPipelineBehavior, RequestPreProcessorBehavior>(Lifetime.Singleton);
+            builder.Register<IPipelineBehavior, RequestPostProcessorBehavior>(Lifetime.Singleton);
         }
 
         private static void RegisterScannedTypes(
@@ -62,14 +65,10 @@ namespace Razensoft.Ports.VContainer
             [NotNull] Assembly[] assemblies)
         {
             var scanResult = RequestHandlerAssemblyScanner.Scan(assemblies);
-            foreach (var handler in scanResult.RequestHandlers)
+
+            foreach (var handler in scanResult.Registrations)
             {
                 builder.Register(handler);
-
-                foreach (var behavior in handler.GetDefaultBehaviors(scanResult))
-                {
-                    builder.Register(behavior);
-                }
             }
         }
 

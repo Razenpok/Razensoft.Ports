@@ -13,8 +13,8 @@ namespace Razensoft.Ports
 {
     public class InputPort : IInputPort
     {
-        private static readonly Dictionary<Type, RequestHandlerBase> RequestHandlers
-            = new Dictionary<Type, RequestHandlerBase>();
+        private static readonly Dictionary<Type, RequestHandlerWrapper> RequestHandlers
+            = new Dictionary<Type, RequestHandlerWrapper>();
 
         private readonly ServiceFactory _serviceFactory;
 
@@ -60,7 +60,7 @@ namespace Razensoft.Ports
                 );
             }
 
-            RequestHandlers.Add(requestType, (RequestHandlerBase) handlerImpl);
+            RequestHandlers.Add(requestType, (RequestHandlerWrapper) handlerImpl);
             return (RequestHandlerWrapper<TResponse>) handlerImpl;
         }
     }

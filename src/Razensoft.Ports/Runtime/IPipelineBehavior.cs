@@ -14,14 +14,14 @@ namespace Razensoft.Ports
     public delegate Task<TResponse> RequestHandlerDelegate<TResponse>();
 #endif
 
-    public interface IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public interface IPipelineBehavior
     {
 #if RAZENSOFT_PORTS_UNITASK
-        UniTask<TResponse> Handle(
+        UniTask<TResponse> Handle<TResponse>(
 #else
         Task<TResponse> Handle(
 #endif
-            TRequest request,
+            IBaseRequest request,
             CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next);
     }

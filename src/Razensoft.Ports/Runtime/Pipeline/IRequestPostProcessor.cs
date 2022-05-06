@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Razensoft.Ports.Pipeline
 {
-    public interface IRequestPostProcessor<in TRequest, in TResponse> where TRequest : IRequest<TResponse>
+    public interface IRequestPostProcessor
     {
 #if RAZENSOFT_PORTS_UNITASK
-        UniTask Process(TRequest request, TResponse response, CancellationToken cancellationToken);
+        UniTask Process<TResponse>(IBaseRequest request, TResponse response, CancellationToken cancellationToken);
 #else
-        Task Process(TRequest request, TResponse response, CancellationToken cancellationToken);
+        Task Process<TResponse>(IBaseRequest request, TResponse response, CancellationToken cancellationToken);
 #endif
     }
 }

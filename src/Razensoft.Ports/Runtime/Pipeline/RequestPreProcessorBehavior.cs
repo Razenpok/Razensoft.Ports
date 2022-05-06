@@ -9,20 +9,19 @@ using System.Threading.Tasks;
 
 namespace Razensoft.Ports.Pipeline
 {
-    public class RequestPreProcessorBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
+    public class RequestPreProcessorBehavior : IPipelineBehavior
     {
-        private readonly IEnumerable<IRequestPreProcessor<TRequest>> _preProcessors;
+        private readonly IEnumerable<IRequestPreProcessor> _preProcessors;
 
-        public RequestPreProcessorBehavior(IEnumerable<IRequestPreProcessor<TRequest>> preProcessors)
+        public RequestPreProcessorBehavior(IEnumerable<IRequestPreProcessor> preProcessors)
             => _preProcessors = preProcessors;
 
 #if RAZENSOFT_PORTS_UNITASK
-        public async UniTask<TResponse> Handle(
+        public async UniTask<TResponse> Handle<TResponse>(
 #else
-        public async Task<TResponse> Handle(
+        public async Task<TResponse> Handle<TResponse>(
 #endif
-            TRequest request,
+            IBaseRequest request,
             CancellationToken cancellationToken,
             RequestHandlerDelegate<TResponse> next)
         {

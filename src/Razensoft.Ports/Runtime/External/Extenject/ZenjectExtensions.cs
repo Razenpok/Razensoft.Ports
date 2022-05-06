@@ -61,6 +61,12 @@ namespace Razensoft.Ports.Extenject
             container.Bind<IInputPort>()
                 .To<InputPort>()
                 .AsSingle();
+            container.Bind<IPipelineBehavior>()
+                .To<RequestPreProcessorBehavior>()
+                .AsSingle();
+            container.Bind<IPipelineBehavior>()
+                .To<RequestPostProcessorBehavior>()
+                .AsSingle();
         }
 
         private static void RegisterScannedTypes(
@@ -68,14 +74,10 @@ namespace Razensoft.Ports.Extenject
             [NotNull] Assembly[] assemblies)
         {
             var scanResult = RequestHandlerAssemblyScanner.Scan(assemblies);
-            foreach (var handler in scanResult.RequestHandlers)
+
+            foreach (var handler in scanResult.Registrations)
             {
                 container.Register(handler);
-
-                foreach (var behavior in handler.GetDefaultBehaviors(scanResult))
-                {
-                    container.Register(behavior);
-                }
             }
         }
 

@@ -46,8 +46,7 @@ namespace Razensoft.Ports
             SubscriptionTracker<TRequest>.ThrowIfHasNoSubscribers();
 
             return _serviceFactory
-                .GetInstances<IPipelineBehavior<TRequest, Unit>>()
-                .Reverse()
+                .GetInstances<IPipelineBehavior>()
                 .Aggregate(
                     (RequestHandlerDelegate<Unit>) (() => UnitSendAsync(request, cancellationToken)),
                     (next, pipeline) => () => pipeline.Handle(request, cancellationToken, next)
